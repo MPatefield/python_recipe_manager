@@ -53,6 +53,14 @@ class RecipeManager:
                 return recipe
         return None
 
+    def view_recipe(self, recipe_name):
+        # Returns the string representation of a recipe, or a message if not found
+        recipe = self.get_recipe(recipe_name)
+        if recipe:
+            return str(recipe)
+        else:
+            return f"Recipe '{recipe_name}' not found."
+
     def list_recipes(self):
         # Returns just the names of all recipes (quick summary list)
         return [recipe.name for recipe in self.recipes]

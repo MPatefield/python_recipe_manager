@@ -26,14 +26,12 @@ def main():
             manager.add_recipe(recipe)
 
         elif choice == '2':
-            # View all recipes - currently just shows names (list_recipes only returns names)
-            recipes = manager.list_recipes()
-            if recipes:
-                print("Recipes:")
-                for recipe_name in recipes:
-                    print(f"- {recipe_name}")
-            else:
-                print("No recipes found.")
+            name = input("Enter the name of the recipe to view: ")
+            if not name:
+                print("Recipe name cannot be empty.")
+                continue
+            recipe_details = manager.view_recipe(name)
+            print(recipe_details)
 
         elif choice == '3':
             # Search recipes by keyword (checks title and ingredients)
