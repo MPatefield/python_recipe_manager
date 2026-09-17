@@ -20,8 +20,17 @@ def main():
         if choice == '1':
             # Add a new recipe - collect details and create a Recipe object
             name = input("Enter recipe Title: ")
+            if not name:
+                print("Recipe title cannot be empty.")
+                continue
             ingredients = input("Enter ingredients (comma-separated): ").split(',')  # turn into a list
+            if not ingredients or all(not ing.strip() for ing in ingredients):
+                print("Ingredients cannot be empty.")
+                continue
             instructions = input("Enter instructions: ")
+            if not instructions:
+                print("Instructions cannot be empty.")
+                continue
             recipe = Recipe(name, ingredients, instructions)
             manager.add_recipe(recipe)
 
@@ -57,11 +66,22 @@ def main():
                 new_ingredients.split(',') if new_ingredients else None,
                 new_instructions if new_instructions else None
             )
+            
 
         elif choice == '5':
             # Delete a recipe by name
             name = input("Enter the name of the recipe to delete: ")
-            manager.remove_recipe(name)
+            if not name:
+                print("Recipe name cannot be empty.")
+                continue
+            recipe = manager.get_recipe(name)
+            if recipe:
+                confirm = input(f"Are you sure you want to delete '{name}'? (y/n): ")
+                if confirm.lower() == 'y':
+                    manager.remove_recipe(name)
+                    print(f"Recipe '{name}' deleted.")
+            else:
+                print(f"Recipe '{name}' not found.")
 
         elif choice == '6':
             # Manually save current recipes to file

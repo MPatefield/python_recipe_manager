@@ -83,6 +83,7 @@ class RecipeManager:
                 recipe.ingredients = new_ingredients
             if new_instructions:
                 recipe.instructions = new_instructions
+            print(f"Recipe '{recipe_name}' updated.")
         else:
             print(f"Recipe '{recipe_name}' not found.")
 
